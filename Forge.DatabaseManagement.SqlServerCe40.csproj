@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net461</TargetFrameworks>
+		<Version>2.0.0.0</Version>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<Copyright>Copyright © Zoltan Juhasz, 2004-2022</Copyright>
+		<Description>Forge Patterns and Practices</Description>
+		<Product>Forge: reference, practice and patterns implementations and helper(s)</Product>
+		<Company>Forge Project Contributor(s)</Company>
+		<PackageId>Forge.DatabaseManagement.SqlServerCe40</PackageId>
+		<Authors>Zoltan Juhasz</Authors>
+		<Title>Forge DatabaseManagement SqlServerCe40</Title>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\.Documents\Forge.pfx</AssemblyOriginatorKeyFile>
+		<ProjectGuid>{D6DCC65B-BEE3-4076-A197-0F8BEDB7FDB0}</ProjectGuid>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DocumentationFile>Forge.DatabaseManagement.SqlServerCe40.xml</DocumentationFile>
+		<RepositoryUrl>https://github.com/JZO001/Forge.DatabaseManagement.SqlServerCe40</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Forge.DatabaseManagement.SqlServerCe40.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="System.Configuration" />
+		<PackageReference Include="Microsoft.SqlServer.Compact" Version="4.0.8876.1" />
+		<PackageReference Include="NHibernate" Version="5.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Forge.Configuration\Forge.Configuration.csproj" />
+		<ProjectReference Include="..\Forge.DatabaseManagement\Forge.DatabaseManagement.csproj" />
+		<ProjectReference Include="..\Forge.Shared\Forge.Shared.csproj" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="echo F|xcopy /r /y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir).Output\$(TargetFramework)\$(TargetName).dll&quot;&#xD;&#xA;echo F|xcopy /r /y &quot;$(TargetDir)$(TargetName).pdb&quot; &quot;$(SolutionDir).Output\$(TargetFramework)\$(TargetName).pdb&quot;&#xD;&#xA;echo F|xcopy /r /y &quot;$(TargetDir)$(TargetName).xml&quot; &quot;$(SolutionDir).Output\$(TargetFramework)\$(TargetName).xml&quot;&#xD;&#xA;" />
+	</Target>
+
+</Project>
